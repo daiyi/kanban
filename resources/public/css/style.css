@@ -1,3 +1,95 @@
-h1 {
-  text-decoration: underline;
+body {
+  font-family: monospace;
+  background: #222;
+  color: #eee;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.column, .new-column {
+  background: rgba(255,255,255,0.1);
+  flex: 0 0 auto;
+  padding: 0.1em 1em;
+  margin: 0.5em;
+  width: 200px;
+  word-wrap: break-word;
+}
+
+.card {
+  /*background: rgba(255,255,255,0.2);*/
+  border-left: 5px solid #000;
+  padding: 0.5em;
+  margin: 1em 0;
+  margin-left: 0.5em;
+}
+
+.card.editing {
+  padding: 0;
+  border-left: 5px solid rgba(0,0,0,0);
+}
+
+/*reset*/
+textarea {
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	box-sizing:content-box;
+
+	/* Move the label to the top */
+	vertical-align:top;
+
+	/* Turn off scroll bars in IE unless needed */
+	overflow:auto;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+/* Remove the stupid outer glow in Webkit */
+textarea:focus {
+	outline:0;
+}
+
+textarea {
+  font-family: monospace;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1em;
+  padding: 0.5em;
+  border: none;
+  background: #222;
+  color: #fff;
+}
+
+.new-card {
+  background: none;
+  color: #bbb;
+  /*border: 2px solid #222;*/
+  padding: 0.5em;
+  margin: 1em 0;
+}
+
+.card:hover, .column h2:hover {
+  color: #fff;
+  background: #222;
+  cursor: pointer;
+}
+.new-card:hover, .new-column:hover {
+  color: #fff;
+  background: #666;
+  cursor: pointer;
+}
+
+.new-column {
+  background: none;
+  color: #999;
+  width: 200px;
+  flex: 0 0 auto;
+  padding: 0.1em 0.9em;
+  margin: 0.5em;
+  border: 2px solid #666;
 }
