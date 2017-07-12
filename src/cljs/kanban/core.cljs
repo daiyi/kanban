@@ -23,7 +23,6 @@
 ; (def cards-cursor
 ;   (r/cursor board [:columns 0 :cards]))
 
-
 (defn- update-title
   [card-cursor title]
   (swap! card-cursor assoc :title title))
@@ -54,6 +53,7 @@
                                        (stop-editing card-cursor))    ;;  (.-charCode event), (.-charCode %)))
                     :on-key-down  #(if (= (.-keyCode %) 27)           ;; f u browser inconsistency
                                        (stop-editing card-cursor))}]] ;; on-key-down & keyCode for `esc`}]]
+                                                                      ;; you can also use (%.which)
       [:div.card
         {:on-click #(start-editing card-cursor)}
         title])))
@@ -69,11 +69,12 @@
   (let [{:keys [title cards editing]} @col-cursor] ;; destructuring!!
     [:div.column
       (if editing
-        [:input {:type "text" :value title}]
+        [:input {:type "text" :value title :key "edit"}]
         [:h2 title])
-      (for [i (range (count cards))]
-        (let [card-cursor (r/cursor col-cursor [:cards i])] ;; [:cards i] rather than [cards i]
-          [Card card-cursor]))
+      (doall
+        (for [i (range (count cards))]
+          (let [card-cursor (r/cursor col-cursor [:cards i])] ;; [:cards i] rather than [cards i]
+            [Card card-cursor])))
       [NewCard]]))
 
 (defn NewColumn
@@ -84,10 +85,11 @@
 (defn Board
   [board]
   [:div.board
-    (for [i (range
-              (count (:columns @board)))] ;; get the column index to construct the path!
-      (let [col-cursor (r/cursor board [:columns i])]
-        [Column col-cursor]))
+    (doall
+      (for [i (range
+                (count (:columns @board)))] ;; get the column index to construct the path!
+        (let [col-cursor (r/cursor board [:columns i])]
+          [Column col-cursor])))
     [NewColumn]])
 
 

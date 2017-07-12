@@ -9,7 +9,7 @@ Open a terminal and type `lein repl` to start a Clojure REPL
 In the REPL, type
 
 ```clojure
-(run)
+(go)
 (browser-repl)
 ```
 
